@@ -1,12 +1,18 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, Request, UploadFile
 from fastapi.responses import FileResponse
 from fastapi.responses import StreamingResponse
 import shutil
 import os
 from utilsfastapi import load_model, predict_image_or_video
 import uuid
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+@app.middleware("http")
+async def add_cors_header(request: Request, call_next):
+    response = await call_next(request)
+    response.headers['Access-Control-Allow-Origin'] = '*'  # Cho phép tất cả các nguồn
+    return response
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
@@ -46,3 +52,11 @@ async def get_result(result_id: str):
         return StreamingResponse(open(result_path, "rb"), media_type="image/jpeg")
     else:
         return {"error": "Result not found"}  # Trả về thông báo lỗi nếu không tìm thấy ảnh
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:5500"],  # Chỉ cho phép frontend từ cổng này
+    allow_credentials=True,
+    allow_methods=["*"],  # Chấp nhận tất cả HTTP methods
+    allow_headers=["*"],  # Chấp nhận tất cả headers
+)
