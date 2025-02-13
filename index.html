@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Check nine-dash in image or video</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Upload Image or Video for Detection</h1>
+      <div class="upload-section">
+        <!-- Thêm aria-label và placeholder -->
+        <input
+          type="file"
+          id="file-upload"
+          name="file-upload"
+          aria-label="Upload image or video"
+          placeholder="Choose file"
+        />
+        <button onclick="uploadFile()">Upload</button>
+      </div>
+
+      <!-- Loader Section: will be shown while waiting for the prediction -->
+      <div id="loader" style="display: none">Processing...</div>
+
+      <div class="result-section">
+        <h3>Prediction Result</h3>
+        <div id="result-container">
+          <!-- Result will be displayed here -->
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
