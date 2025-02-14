@@ -4,9 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Check nine-dash in image or video</title>
+    <link
+      rel="icon"
+      href="https://meetrix.io/articles/content/images/2024/02/Meetrix-default-thumbnail-1-1.png"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <header>
+      <a href="https://student.uit.edu.vn/"
+        ><img
+          src="https://www.uit.edu.vn/sites/vi/files/images/Logos/Logo_UIT_Web_Transparent.png"
+      /></a>
+      <h1>Check nine-dash in image or video</h1>
+    </header>
     <div class="container">
       <h1>Upload Image or Video for Detection</h1>
       <div class="upload-section">
@@ -20,7 +31,20 @@
         />
         <button onclick="uploadFile()">Upload</button>
       </div>
-
+      <div class="min-confidence">
+        <label for="min-confidence">Min Confidence (%)</label>
+        <input
+          type="range"
+          id="min-confidence"
+          name="min-confidence"
+          min="0"
+          max="100"
+          value="40"
+          step="1"
+          onchange="updateConfidenceValue()"
+        />
+        <span id="confidence-value">40</span>%
+      </div>
       <!-- Loader Section: will be shown while waiting for the prediction -->
       <div id="loader" style="display: none">Processing...</div>
 

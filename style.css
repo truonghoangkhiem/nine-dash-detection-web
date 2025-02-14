@@ -1,8 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f4f4f9;
+}
+
+#result-container {
+  max-width: 60%; /* You can adjust this value to control the size */
+  height: auto; /* Keeps the aspect ratio */
+  margin: 20px auto; /* Optional: centers the image */
+  display: block; /* Ensures the image is displayed as a block element */
+}
+
+#image-roboflow {
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+  display: block;
+  position: absolute;
+}
+
+#file-upload {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #6c63ff; /* Thêm border cho input */
+  border-radius: 8px; /* Làm tròn các góc của border */
+  font-size: 1.1rem; /* Tăng kích thước chữ bên trong input */
+  width: 60%; /* Tăng kích thước chiều rộng của input */
+  color: #6c63ff;
+  text-align: center;
+  cursor: pointer;
 }
 
 .container {
@@ -17,14 +49,13 @@ h1 {
   margin-bottom: 30px; /* Sửa lỗi margin */
 }
 
-.upload-section,
-.result-section {
+.upload-section {
   margin-bottom: 40px;
 }
 
-#file-upload {
-  padding: 10px;
-  margin-bottom: 20px;
+.result-section {
+  margin-top: 40px;
+  display: none;
 }
 
 button {
@@ -40,6 +71,10 @@ button:hover {
   background-color: #5a54e1;
 }
 
+button:active {
+  background-color: #9400d3;
+}
+
 #result-container img {
   max-width: 100%;
   height: auto;
@@ -48,4 +83,56 @@ button:hover {
 div.swal2-icon {
   user-select: none;
   -webkit-user-select: none; /* Để hỗ trợ Safari */
+}
+
+header {
+  width: 100%;
+  height: 100px;
+  background-color: rgb(205, 227, 227);
+  text-align: center;
+  align-items: center;
+  justify-content: space-between; /* Căn giữa tiêu đề và logo */
+  justify-content: center; /* Căn giữa nội dung */
+  vertical-align: middle;
+  display: flex;
+  padding: 0 20px;
+}
+
+header h1 {
+  font-size: 50px;
+  color: rgb(125, 62, 144);
+  margin-top: 20px;
+  margin-left: 20px;
+  text-align: center;
+  flex-grow: 1;
+}
+header img {
+  width: 90px;
+  height: 80px;
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-left: 50px;
+}
+.result-section h3 {
+  font-size: 30px;
+  color: rgb(38, 78, 198);
+}
+
+.min-confidence {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.min-confidence label {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.min-confidence input {
+  width: 30%;
+  margin-top: 10px;
+}
+
+.min-confidence button {
+  font-weight: bold;
 }

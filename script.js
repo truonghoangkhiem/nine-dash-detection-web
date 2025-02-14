@@ -7,8 +7,12 @@ async function uploadFile() {
     return;
   }
 
+  // Get the min confidence value from the slider
+  const minConfidence = document.getElementById("min-confidence").value / 100;
+
   const formData = new FormData();
   formData.append("file", file);
+  formData.append("minConfidence", minConfidence);
 
   const loader = document.getElementById("loader");
   loader.style.display = "block"; // Hiển thị loader trong khi đợi
@@ -42,11 +46,21 @@ async function uploadFile() {
 
     // Hiển thị kết quả lên giao diện người dùng
     const resultContainer = document.getElementById("result-container");
-    resultContainer.innerHTML = `<img src="${imageUrl}" alt="Prediction Result">`;
+    resultContainer.innerHTML = ""; // Xóa ảnh cũ
+    resultContainer.innerHTML += `<img src="${imageUrl}" alt="Prediction Result">`;
+    const resultSection = document.querySelector(".result-section");
+    resultSection.style.display = "block"; // Hiển thị kết quả
   } catch (error) {
     console.error(error);
     alert("Error during file upload or prediction.");
   } finally {
     loader.style.display = "none"; // Ẩn loader khi xong
+    // resultContainer.innerHTML = ""; // Xóa ảnh kết quả cũ
   }
+}
+
+// Hàm cập nhật giá trị phần trăm
+function updateConfidenceValue() {
+  const minConfidence = document.getElementById("min-confidence").value;
+  document.getElementById("confidence-value").textContent = minConfidence;
 }

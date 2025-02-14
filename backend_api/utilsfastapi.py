@@ -6,12 +6,16 @@ import os
 def load_model(weights_path=r'C:/Users/khiem/Downloads/Nine-dashmodel/yolov5/runs/train/exp2/weights/best.pt'):
     """ Load trained YOLOv5 model """
     model = torch.hub.load('ultralytics/yolov5', 'custom', path=weights_path, force_reload=True)
-    model.conf = 0.4  # Confidence threshold
+    model.conf = 0.4  # Confidence threshold, set this to the minimum confidence you want
     return model
 
-def predict_image_or_video(file_path: str, model, is_video=False):
-    """ Predict on a single image or video based on the provided path """
+def predict_image_or_video(file_path: str, model, is_video=False, min_confidence=0.4):
+    """ Predict on a single image or video based on the provided path and confidence threshold """
     save_path = None
+
+    # Update model's confidence threshold to the one from min_confidence
+    model.conf = min_confidence  # Setting confidence threshold dynamically
+
     if is_video:
         # Nếu là video, xử lý video từng frame
         cap = cv2.VideoCapture(file_path)
@@ -27,7 +31,7 @@ def predict_image_or_video(file_path: str, model, is_video=False):
             results = model(frame)
             pred = results.xywh[0]  # Dự đoán trên frame, trả về [class, x, y, w, h, confidence]
 
-            # Kiểm tra xem có đối tượng nào được phát hiện không (confidence > 0)
+            # Kiểm tra xem có đối tượng nào được phát hiện không (confidence > min_confidence)
             if len(pred) > 0:
                 # Nếu có đối tượng, hiển thị kết quả và dừng
                 results.show()
