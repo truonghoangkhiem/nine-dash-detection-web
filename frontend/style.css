@@ -131,8 +131,10 @@ header img {
 .min-confidence input {
   width: 30%;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .min-confidence button {
   font-weight: bold;
+  cursor: pointer;
 }
